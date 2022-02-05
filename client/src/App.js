@@ -3,9 +3,12 @@ import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Header from "./components/common/Header";
-// import Login from "./components/login/Login";
-import Signup from "./components/signup/Signup";
 const Login = React.lazy(() => import("./components/login/Login"));
+const Signup = React.lazy(() => import("./components/signup/Signup"));
+const Home = React.lazy(() => import("./components/home/Home"));
+const CreateBlog = React.lazy(() =>
+    import("./components/createBlog/CreateBlog")
+);
 
 function App() {
     return (
@@ -13,15 +16,17 @@ function App() {
             <Suspense
                 fallback={
                     <div>
-                        <img src="./images/loading.gif" alt="Loading..." />
+                        <img src="./images/lazy-loading.gif" alt="Loading..." />
                     </div>
                 }
             >
                 <Router>
                     <Header />
                     <Routes>
+                        <Route path="/" element={<Home />} />
                         <Route path="/login" element={<Login />} />
                         <Route path="/signup" element={<Signup />} />
+                        <Route path="/create-blog" element={<CreateBlog />} />
                     </Routes>
                 </Router>
             </Suspense>
